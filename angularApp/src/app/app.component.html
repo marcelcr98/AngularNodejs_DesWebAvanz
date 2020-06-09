@@ -1,0 +1,39 @@
+ <div style="text-align:center">
+    <a routerLink="/productos">Productos</a> - 
+    <a routerLink="/acercade">Acerca de ...</a>
+    <div style="border: 1px solid red">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div>
+    <h1>Administración de artículos</h1>
+      <table class="table" border="1" *ngIf="hayRegistros(); else sinproductos">
+        <tr>
+          <td>Codigo</td>
+          <td>Nombre</td>
+          <td>Precio</td>
+          <td>Borrar</td>
+          <td>Seleccionar</td>
+        </tr>
+        <tr *ngFor="let producto of lista">
+          <td>{{producto._id}}</td>
+          <td>{{producto.descripcion}}</td>
+          <td>{{producto.precio}}</td>
+          <td><button class="btn btn-danger"(click)="eliminar(producto._id)">Borrar?</button></td>
+          <td><button class="btn btn-warning"(click)="mostrar(producto._id)">Seleccionar</button></td>
+        </tr>
+      </table>
+      <ng-template #sinproductos><p>No hay productos</p></ng-template>
+      <div >
+        <h1>Datos</h1>
+        <p>
+          Descripcion:<input class="form-control" type="text"  [(ngModel)]="prod.descripcion" />
+        </p>
+        <p>
+          Precio:<input class="form-control"  type="text" [(ngModel)]="prod.precio" />
+        </p>            
+        <p><button class="btn btn-success" (click)="nuevo()">Agregar</button>
+        <button class="btn btn-primary"(click)="nuevo()">Modificar</button></p>
+      </div>
+  </div>
+
